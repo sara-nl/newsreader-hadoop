@@ -46,7 +46,7 @@ Optionally you can monitor the pipeline using [Driven](http://www.cascading.org/
 
 You can use the loader tool supplied by the newsreader-hadoop.jar: 
 
-		yarn -jar newsreader-hadoop.jar loader unload [documents on HDFS] [path to local filesystem]
+		yarn -jar newsreader-hadoop.jar loader unload [documents on HDFS] [path to local file system]
     
 #### Extending the pipeline
 
