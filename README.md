@@ -27,7 +27,7 @@ Once the component zip file and the newsreader-hadoop.jar have been created runn
 
 For the components simply place the zip in a location on HDFS using the Hadoop command line tools. For the documents you can use the loader tool supplied by the newsreader-hadoop.jar: 
 
-		yarn -jar newsreader-hadoop.jar loader load [local directory with NAF files] [destination path on HDFS] [number of documents per sequence file]
+		yarn jar newsreader-hadoop.jar loader load [local directory with NAF files] [destination path on HDFS] [number of documents per sequence file]
     
 Keep in mind that the amount of mappers is determined by either the size of the sequence file(s) on HDFS or the amount of separate files (if the separate files are smaller than the HDFS block size). In other words the documents per file setting can be used to control parallelism of the pipeline run. The documents
 are stored in the sequence files as key,value = Text,Text where the key is the original file name (you must use unique file names) and the value is the NAF xml text.
@@ -36,7 +36,7 @@ are stored in the sequence files as key,value = Text,Text where the key is the o
 
 You can use the pipeline tool supplied by the newsreader-hadoop.jar: 
 
-		yarn -jar newsreader-hadoop.jar pipeline [input documents on HDFS] [output path on HDFS] [path for failed documents on HDFS] [path to components zipfile on HDFS]
+		yarn jar newsreader-hadoop.jar pipeline [input documents on HDFS] [output path on HDFS] [path for failed documents on HDFS] [path to components zipfile on HDFS]
 
 Optionally you can monitor the pipeline using [Driven](http://www.cascading.org/2014/02/14/driven-for-cascading/). In order to do so add the driven jar to the Hadoop classpath:
 
@@ -46,7 +46,7 @@ Optionally you can monitor the pipeline using [Driven](http://www.cascading.org/
 
 You can use the loader tool supplied by the newsreader-hadoop.jar: 
 
-		yarn -jar newsreader-hadoop.jar loader unload [documents on HDFS] [path to local file system]
+		yarn jar newsreader-hadoop.jar loader unload [documents on HDFS] [path to local file system]
     
 #### Extending the pipeline
 
