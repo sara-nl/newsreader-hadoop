@@ -16,12 +16,12 @@ following works for eclipse:
 2. Open eclipse and create a new Java project; Do not use the default location but select the directory you just cloned into as location for the project
 3. The source files should now appear in your project. Make sure to install the IvyDE package and Ivy Ant tasks available here: [http://ant.apache.org/ivy/ivyde/download.cgi](http://ant.apache.org/ivy/ivyde/download.cgi). 
 4. With the Ivy packages installed the ivy.xml can be used for resolving the dependencies: right click the file and 'Add Ivy Library...'.
-5. Clone the accompanying components into the location of the project: git clone https://github.com/sara-nl/newsreader-hadoop-components
+5. Make a subdirectory within the project: newsreader-hadoop-components and download the accompanying components from [beehub](https://beehub.nl/Newsreader/newsreader-hadoop-components) to this directory. 
 6. Use the Ant build tasks (Ant view in eclipse) to build the jar and zip the components.
 
 #### Running the pipeline
 
-One the component zip file and the newsreader-hadoop.jar have been created running the pipeline should be straightforward:
+Once the component zip file and the newsreader-hadoop.jar have been created running the pipeline should be straightforward:
 
 ##### Upload documents and components to HDFS. 
 
