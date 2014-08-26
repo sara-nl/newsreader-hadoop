@@ -64,5 +64,5 @@ If a new component only requires the default two arguments mentioned above most 
 
 If a new component requires extra arguments to the run.sh script. One needs to follow the previous two steps but instead of using a GenericNewsreaderModule as implementing class one should create one for this module specifically. See the FBKTime class as an example.
 
-Finally some notes on error handling. As you may have noticed a timeout and linecount for the standard error stream should be provided for each module. The timeout is used to stop modules that take longer to execute on a single documents. That is documents that take longer than this threshold will fail on that specific module. Documents
+Finally some notes on error handling. As you may have noticed a timeout and linecount for the standard error stream should be provided for each module. The timeout is used to stop modules that take longer to execute on a single document. That is documents that take longer than this threshold will fail on that specific module. Documents
 that produce more lines in the standard error than the threshold will also fail. These documents will be stored on HDFS in the path supplied as path for failed documents on HDFS.
