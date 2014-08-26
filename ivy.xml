@@ -1,0 +1,15 @@
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info
+        organisation="SURFsara"
+        module="newsreader-hadoop"
+        status="release">
+	</info>
+	<dependencies>
+	   <dependency org="cascading" name="cascading-hadoop" rev="2.5.5"/>
+       <dependency org="cascading" name="cascading-core" rev="2.5.5"/>
+	   <dependency org="org.apache.hadoop" name="hadoop-client" rev="2.4.0.2.1.1.0-385"/>
+       <exclude org="org.apache.hadoop" module="hadoop-core"/>
+       <override org="org.apache.hadoop" rev="2.4.0.2.1.1.0-385"/>
+    </dependencies>
+</ivy-module>
