@@ -24,13 +24,19 @@ import nl.surfsara.newsreader.pipeline.util.PipeThread;
 
 import org.apache.log4j.Logger;
 
+/**
+ * An abstract module that runs in a subprocess. Most modules will run in a
+ * subprocess of some sort. This functionality is provided here.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public abstract class SubprocessModule extends AbstractModule {
 	private static final Logger logger = Logger.getLogger(SubprocessModule.class);
 	private InputStream subProcessStdIn = System.in;
 	private OutputStream subProcessStdOut = System.out;
 	private OutputStream subProcessStdErr = System.err;
 	private String commandLine = "";
-	
+
 	public void setCommandLine(String value) {
 		this.commandLine = value;
 	}

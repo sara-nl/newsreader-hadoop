@@ -34,8 +34,17 @@ import cascading.tap.Tap;
 import cascading.tap.hadoop.Hfs;
 import cascading.tuple.Fields;
 
+/**
+ * An implementation of the Newsreader NLP pipeline as a Cascading Flow.
+ * 
+ * Documents are read from sequence files(s) on HDFS and inserted into the tuple stream as the following tuples: <document name, document contents>.
+ * The first function inserts the document failed field for each tuple: <document name, document contents, document failed>
+ * The next functions execute the pipeline on the document contents field. Documents where docFailed has been set to true will not be processed by subsequent moduled.
+ * Finally, the stream is split and failed and successful documents are stored in separate sinks on HDFS (again as sequence files with <key,value> = <document name, document contents>  
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class NewsReaderFlow implements Flow {
-
 	
 	@Override
 	public FlowDef getFlowDefinition(String inPath, String outPath, String errorPath) throws Exception {

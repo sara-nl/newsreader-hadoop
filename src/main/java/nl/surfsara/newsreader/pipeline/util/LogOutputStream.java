@@ -20,6 +20,11 @@ import org.apache.log4j.Logger;
 
 import java.io.OutputStream;
 
+/**
+ * Utility class; logs a stream to a log4j logger. 
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class LogOutputStream extends OutputStream {
     private Logger logger;
     private Level level;

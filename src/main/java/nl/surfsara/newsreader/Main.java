@@ -20,6 +20,11 @@ import java.util.Arrays;
 import nl.surfsara.newsreader.loader.Loader;
 import nl.surfsara.newsreader.pipeline.Pipeline;
 
+/**
+ * Main entry point for the newsreader-hadoop tools.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class Main {
 	public enum Tools {
 		LOADER("loader", "Import/Export tool for NAF files on Hadoop."), 

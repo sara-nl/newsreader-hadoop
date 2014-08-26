@@ -24,6 +24,23 @@ import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * An implementation of a the FBK-time Newsreader NLP component.
+ * 
+ * Most Newsreader components run as a run.sh bash script that consumes a NAF
+ * text from standard in and outputs the annotated NAF text to standard out. For
+ * running on Hadoop two default arguments have been added: the absolute path to
+ * the component directory and an absolute path to a directory usable as scratch
+ * or temporary storage. In addition FBK-time needs the document to be stored on
+ * local scratch and is provided with this file as one of the arguments.
+ * 
+ * This class sets up the input- and outputstreams and calls the run.sh script
+ * with the correct arguments. Failures are flagged due to timeout (failure to
+ * process in time) or by exceeding a threshold of newlines in the standard
+ * error stream (see the ModuleFactory class for these settings).
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class FBKTime extends SubprocessModule {
 	private static final Logger logger = Logger.getLogger(FBKTime.class);
 
@@ -33,7 +50,7 @@ public class FBKTime extends SubprocessModule {
 		// TODO this smells.. Necessary for the reflection..
 		// Ignore argument
 	}
-	
+
 	@Override
 	public Module call() throws Exception {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -47,7 +64,7 @@ public class FBKTime extends SubprocessModule {
 		fos.flush();
 		fos.close();
 		xmlStream.close();
-		
+
 		File f = new File(mfi.getModulePath() + "/run.sh");
 		File component = new File(mfi.getModulePath());
 		File scratch = new File(getLocalDirectory());

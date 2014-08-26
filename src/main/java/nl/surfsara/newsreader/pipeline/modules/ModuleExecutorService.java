@@ -19,13 +19,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
+/**
+ * This class provides access to the Threadpool used to execute modules.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class ModuleExecutorService {
 	private ExecutorService threadPool;
 
 	public ModuleExecutorService() {
 		threadPool = Executors.newCachedThreadPool();
 	}
-	
+
 	public FutureTask<Module> executeModule(Module m) {
 		FutureTask<Module> mft = new FutureTask<Module>(m);
 		threadPool.execute(mft);

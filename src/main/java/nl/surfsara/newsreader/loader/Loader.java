@@ -23,6 +23,12 @@ import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+/**
+ * Runnable class that uses an existing Kerberos tgt to to upload to, or
+ * download newsreader files from, HDFS.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class Loader implements Runnable {
 	private static final Logger logger = Logger.getLogger(Loader.class);
 	private String[] args;

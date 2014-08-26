@@ -42,6 +42,8 @@ Optionally you can monitor the pipeline using [Driven](http://www.cascading.org/
 
 		export HADOOP_CLASSPATH=[path to driven jar file]
 
+Finally, Cascading creates a newsreader.dot file on execution; this graphical representation of the pipeline can be examined in Graphviz.
+
 ##### Retrieve the output documents from HDFS. 
 
 You can use the loader tool supplied by the newsreader-hadoop.jar: 

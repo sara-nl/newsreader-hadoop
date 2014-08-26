@@ -36,6 +36,11 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 
+/**
+ * Function that executes the modules run script in a separate Thread.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 @SuppressWarnings("serial")
 public class RunModuleFunction extends BaseOperation<Tuple> implements Function<Tuple> {
 	private static final Logger logger = Logger.getLogger(RunModuleFunction.class);

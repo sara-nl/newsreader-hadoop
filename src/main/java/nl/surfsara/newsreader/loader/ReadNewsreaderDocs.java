@@ -29,6 +29,14 @@ import org.apache.hadoop.io.SequenceFile.Reader.Option;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.SequenceFile;
 
+/**
+ * Accessing HDFS needs to be performed with privileges for a principal (user)
+ * enabled. This is an implementation of a PriviligedAction that, as the logged
+ * in user, reads NAF documents from a sequence file and stores these on the
+ * local file system.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class ReadNewsreaderDocs implements PrivilegedAction<Long> {
 
 	private Configuration conf;

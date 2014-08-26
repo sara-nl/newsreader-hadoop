@@ -18,6 +18,7 @@ package nl.surfsara.newsreader.pipeline;
 import java.util.Properties;
 
 import nl.surfsara.newsreader.pipeline.cascading.flows.NewsReaderFlow;
+import nl.surfsara.newsreader.pipeline.modules.ModuleConstants;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -27,6 +28,11 @@ import cascading.flow.FlowDef;
 import cascading.flow.hadoop.HadoopFlowConnector;
 import cascading.property.AppProps;
 
+/**
+ * Runnable class that runs the newsreader NLP pipeline on Hadoop clusters.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class Pipeline implements Runnable {
 	private static final Logger logger = Logger.getLogger(Pipeline.class);
 	private String[] args;
@@ -51,7 +57,7 @@ public class Pipeline implements Runnable {
 			properties.setProperty("mapreduce.job.complete.cancel.delegation.tokens", "false");
 
 			properties.put("mapreduce.task.timeout", "7200000");
-			properties.put("mapreduce.job.cache.archives", componentsCache + "#components");
+			properties.put("mapreduce.job.cache.archives", componentsCache + "#" + ModuleConstants.ARCHIVEROOT);
 
 			// Child jvm settings
 			properties.put("mapreduce.map.java.opts", "-Xmx8G");

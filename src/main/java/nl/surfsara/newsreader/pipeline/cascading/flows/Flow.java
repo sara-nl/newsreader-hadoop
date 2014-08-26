@@ -17,6 +17,24 @@ package nl.surfsara.newsreader.pipeline.cascading.flows;
 
 import cascading.flow.FlowDef;
 
+/**
+ * Defines a Flow interface for the Newsreader pipeline.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public interface Flow {
-   public abstract FlowDef getFlowDefinition(String inPath, String outPath, String errorPath) throws Exception;
+
+	/**
+	 * Create a Cascading FlowDef for the specified parameters
+	 * 
+	 * @param inPath
+	 *            A path to be used as input for the flow
+	 * @param outPath
+	 *            A path to be used as output for the floe
+	 * @param errorPath
+	 *            A path where failed documents will be stored
+	 * @return A Flowdefinition
+	 * @throws Exception On any error during setup of the flow.
+	 */
+	public abstract FlowDef getFlowDefinition(String inPath, String outPath, String errorPath) throws Exception;
 }

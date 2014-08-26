@@ -24,6 +24,13 @@ import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * Runnable class that copies (pipes) an Inputstream to an Outputstream. Used
+ * for streaming subprocess Input- and Outputstreams in a separate thread
+ * (preventing deadlocks).
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class PipeThread implements Runnable {
 	private static final Logger logger = Logger.getLogger(PipeThread.class);
 	private OutputStream os;

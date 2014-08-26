@@ -36,6 +36,13 @@ import org.apache.hadoop.io.compress.CompressionCodec;
 import org.apache.hadoop.io.compress.DefaultCodec;
 import org.apache.log4j.Logger;
 
+/**
+ * Accessing HDFS needs to be performed with privileges for a principal (user)
+ * enabled. This is an implementation of a PriviligedAction that, as the logged
+ * in user, writes NAF documents to one ore more sequence files.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class WriteNewsreaderDocs implements PrivilegedAction<Long> {
 
 	private static final Logger logger = Logger.getLogger(WriteNewsreaderDocs.class);

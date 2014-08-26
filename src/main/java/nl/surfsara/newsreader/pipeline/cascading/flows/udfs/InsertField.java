@@ -25,6 +25,10 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 
+/**
+ * Function that insert the docFailed field for each tuple in the tuple stream.
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 @SuppressWarnings("serial")
 public class InsertField extends BaseOperation<Tuple> implements Function<Tuple> {
 	

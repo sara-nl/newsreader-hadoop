@@ -22,6 +22,11 @@ import cascading.operation.FilterCall;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 
+/**
+ * Filter that removes failed documents from the tuple stream.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 @SuppressWarnings({ "serial"})
 public class FailedFilter extends BaseOperation<Tuple> implements Filter<Tuple> {
 

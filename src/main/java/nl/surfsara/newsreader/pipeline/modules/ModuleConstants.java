@@ -15,6 +15,18 @@
  */
 package nl.surfsara.newsreader.pipeline.modules;
 
+/**
+ * Constants for all modules.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public final class ModuleConstants {
+	/**
+	 * The components are provided to the tasks via a zipfile and distributed
+	 * cache. The zipfile can have any name but will be symlinked to this value.
+	 * The distributed cache directory (provided by the system) plus this
+	 * constant and the component name provide the absolute path to the
+	 * component directory.
+	 */
 	public static final String ARCHIVEROOT = "components";
 }

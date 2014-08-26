@@ -21,6 +21,21 @@ import java.io.File;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
+/**
+ * An implementation of a generic Newsreader NLP component.
+ * 
+ * Most Newsreader components run as a run.sh bash script that consumes a NAF
+ * text from standard in and outputs the annotated NAF text to standard out. For
+ * running on Hadoop two default arguments have been added: the absolute path to
+ * the component directory and an absolute path to a directory usable as
+ * scratch or temporary storage. This class sets up the input- and outputstreams
+ * and calls the run.sh script with the correct arguments. Failures are flagged
+ * due to timeout (failure to process in time) or by exceeding a threshold of
+ * newlines in the standard error stream (see the ModuleFactory class for these
+ * settings).
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public class GenericNewsreaderModule extends SubprocessModule {
 	private static final Logger logger = Logger.getLogger(GenericNewsreaderModule.class);
 
@@ -34,7 +49,7 @@ public class GenericNewsreaderModule extends SubprocessModule {
 	public Module call() throws Exception {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ByteArrayOutputStream bes = new ByteArrayOutputStream();
-		
+
 		File f = new File(mfi.getModulePath() + "/run.sh");
 		File component = new File(mfi.getModulePath());
 		File scratch = new File(getLocalDirectory());
@@ -44,12 +59,14 @@ public class GenericNewsreaderModule extends SubprocessModule {
 		super.setSubProcessStdOut(bos);
 		super.setSubProcessStdErr(bes);
 		super.runSubprocess();
-		
+
 		String stderr = bes.toString();
 		int newlines = stderr.split(System.getProperty("line.separator")).length;
-		if(newlines > mfi.getNumErrorLines()) {
+		if (newlines > mfi.getNumErrorLines()) {
 			setFailed(true);
 		}
+		// TODO instead of checking the number of newlines in stderr a much prettier solution would be to capture the exit code of
+		// the run.sh script. The run.sh scripts do need to be altered so that this exit code reflects functioning or disfunctioning of a component.
 		logger.error(stderr);
 		bos.flush();
 		setOutputDocument(bos.toString());
@@ -57,5 +74,5 @@ public class GenericNewsreaderModule extends SubprocessModule {
 		bes.close();
 		return this;
 	}
-	
+
 }

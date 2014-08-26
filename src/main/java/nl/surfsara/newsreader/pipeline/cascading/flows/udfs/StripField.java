@@ -25,6 +25,11 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 
+/**
+ * Function that strips the document failed (docFailed) field from the stream when it is no longer needed. 
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 @SuppressWarnings("serial")
 public class StripField extends BaseOperation<Tuple> implements Function<Tuple> {
 	

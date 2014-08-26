@@ -22,6 +22,11 @@ import cascading.operation.FilterCall;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 
+/**
+ * Filter that removes succesful documents from the tuple stream.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 @SuppressWarnings({ "serial" })
 public class SuccessFilter extends BaseOperation<Tuple> implements Filter<Tuple> {
 
@@ -29,7 +34,7 @@ public class SuccessFilter extends BaseOperation<Tuple> implements Filter<Tuple>
 	@Override
 	public boolean isRemove(FlowProcess flowProcess, FilterCall filterCall) {
 		TupleEntry args = filterCall.getArguments();
-		return !args.getBoolean("docFailed"); 
+		return !args.getBoolean("docFailed");
 	}
 
 }

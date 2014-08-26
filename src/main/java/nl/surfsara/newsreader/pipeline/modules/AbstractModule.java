@@ -15,6 +15,12 @@
  */
 package nl.surfsara.newsreader.pipeline.modules;
 
+/**
+ * Abstract implementation of a Module. A large part of the functionality is
+ * common for all modules and implemented here.
+ * 
+ * @author mathijs.kattenberg@surfsara.nl
+ */
 public abstract class AbstractModule implements Module {
 	private String xmlText;
 	private String xmlOutput;
@@ -32,7 +38,7 @@ public abstract class AbstractModule implements Module {
 	public void setOutputDocument(String xmlOutput) {
 		this.xmlOutput = xmlOutput;
 	}
-	
+
 	public String getOutputDocument() {
 		return xmlOutput;
 	}
