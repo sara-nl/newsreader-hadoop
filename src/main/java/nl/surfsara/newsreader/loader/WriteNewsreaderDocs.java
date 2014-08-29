@@ -113,7 +113,7 @@ public class WriteNewsreaderDocs implements PrivilegedAction<Long> {
 		StringBuffer buff = new StringBuffer();
 		String line = br.readLine();
 		while (line != null) {
-			buff.append(line);
+			buff.append(line + "\n");
 			line = br.readLine();
 		}
 		br.close();

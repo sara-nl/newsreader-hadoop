@@ -86,6 +86,7 @@ public class Pipeline implements Runnable {
 				flow.complete();
 			} catch (Exception e) {
 				logger.error(e);
+				e.printStackTrace();
 			}
 		}
 		if (showusage) {
