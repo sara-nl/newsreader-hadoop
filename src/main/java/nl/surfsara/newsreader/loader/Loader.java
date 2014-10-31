@@ -16,6 +16,7 @@
 package nl.surfsara.newsreader.loader;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -55,6 +56,7 @@ public class Loader implements Runnable {
 					showusage = true;
 				} else {
 					System.out.println("Uploading documents to Hadoop...");
+					System.out.println("Using " + Charset.defaultCharset() + " as default encoding.");
 					try {
 						init();
 						int docsPerFile = Integer.parseInt(args[3]);
