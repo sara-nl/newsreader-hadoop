@@ -6,7 +6,7 @@
 	<!-- Set up build properties -->
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="jarFile" value="${basedir}/newsreader-hadoop.jar" />
-	<property name="componentsFile" value="${basedir}/components.zip" />
+	<property name="componentsFile" value="${basedir}/newsreader-hadoop-components.zip" />
 	<property name="bin.dir" value="${basedir}/bin" />
 
 	<!-- Create jar from compiled sources  -->

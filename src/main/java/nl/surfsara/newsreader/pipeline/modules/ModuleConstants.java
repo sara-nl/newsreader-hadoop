@@ -28,5 +28,5 @@ public final class ModuleConstants {
 	 * constant and the component name provide the absolute path to the
 	 * component directory.
 	 */
-	public static final String ARCHIVEROOT = "components";
+	public static final String ARCHIVEROOT = "newsreader-hadoop-components";
 }
