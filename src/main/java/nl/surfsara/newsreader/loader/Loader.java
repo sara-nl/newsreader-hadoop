@@ -110,12 +110,12 @@ public class Loader implements Runnable {
 		System.out.println("     Use a setting of -1 to write all documents to one file only."); 
 		System.out.println();
 		System.out.println("Some examples:");
-		System.out.println("Upload /foo/* to a single file in /bar/file_0 on HDFS: java -jar newsreader-hadoop.jar load /foo /bar/file -1");
-		System.out.println("Upload /foo/* to files in /bar/file/docs_{0..} on HDFS with 10 docs per file: java -jar newsreader-hadoop.jar load /foo /bar/file/docs 10");
+		System.out.println("Upload /foo/* to a single file in /bar/file_0 on HDFS: java -jar newsreader-hadoop.jar loader load /foo /bar/file -1");
+		System.out.println("Upload /foo/* to files in /bar/file/docs_{0..} on HDFS with 10 docs per file: java -jar newsreader-hadoop.jar loader load /foo /bar/file/docs 10");
 		System.out.println("Note that in the last example the number of files on HDFS is dependent on the number of input files (e.g. for 100 xml files; 10 sequence");
 		System.out.println("files will be created. The filename will be postfixed with a _ and filenumber). This also effects the amount of mappers.");
 		System.out.println();
-		System.out.println("Downlaod /foo/part* on HDFS to local document files in /bar/: java -jar newsreader-hadoop.jar load /foo/part* /bar/");
+		System.out.println("Download /foo/part* on HDFS to local document files in /bar/: java -jar newsreader-hadoop.jar loader load /foo/part* /bar/");
 		System.out.println();
 	}
 

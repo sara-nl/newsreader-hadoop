@@ -60,18 +60,18 @@ public class Pipeline implements Runnable {
 			properties.put("mapreduce.job.cache.archives", componentsCache + "#" + ModuleConstants.ARCHIVEROOT);
 
 			// Child jvm settings
-			properties.put("mapreduce.map.java.opts", "-Xmx8G");
+			//properties.put("mapreduce.map.java.opts", "-Xmx8G");
 			//properties.put("mapreduce.reduce.java.opts","");
 
 			// Memory limits
-			properties.put("mapreduce.map.memory.mb", "10240");
+			//properties.put("mapreduce.map.memory.mb", "10240");
 			//properties.put("mapreduce.reduce.memory.mb","");
 
 			// Slow start reducers:
 			properties.put("mapreduce.job.reduce.slowstart.completedmaps", "0.9");
 			
 			// Number of reducers
-			properties.put("mapreduce.job.reduces", "15");
+			properties.put("mapreduce.job.reduces", "5");
 
 			AppProps.setApplicationJarClass(properties, Pipeline.class);
 			HadoopFlowConnector flowConnector = new HadoopFlowConnector(properties);

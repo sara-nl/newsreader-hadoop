@@ -40,6 +40,7 @@
 		</delete>
 		<delete file="${componentsFile}"/>
 		<delete file="newsreader.dot"/>
+		<delete file="newsreader-hadoop.log"/>
 	</target>
 
 	<target name="retrieve">
