@@ -24,3 +24,9 @@ gen/
 /.project
 /.classpath
 /*components*
+
+# Misc. files
+out/
+err/
+input/
+*.dot
