@@ -12,8 +12,9 @@
       </configurations>
 	
 	<dependencies>
-	   <dependency org="cascading" name="cascading-hadoop" rev="2.6.3" conf="build->default"/>
-       <dependency org="cascading" name="cascading-core" rev="2.6.3" conf="build->default"/>
+	   <dependency org="cascading" name="cascading-hadoop" rev="3.0.1" conf="build->default"/>
+       <dependency org="cascading" name="cascading-core" rev="3.0.1" conf="build->default"/>
+	   <dependency org="org.json" name="json" rev="20140107"/>
 	   <dependency org="org.apache.hadoop" name="hadoop-client" rev="2.6.0" conf="compile->default"/>
     </dependencies>
 </ivy-module>
