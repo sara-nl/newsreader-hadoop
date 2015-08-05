@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import nl.surfsara.newsreader.pipeline.modules.Module;
 import nl.surfsara.newsreader.pipeline.modules.ModuleExecutorService;
-import nl.surfsara.newsreader.pipeline.modules.ModuleFactory;
+import nl.surfsara.newsreader.pipeline.modules.PipelineStep;
 
 import org.apache.hadoop.io.Text;
 import org.apache.log4j.Logger;
@@ -45,18 +45,19 @@ import cascading.tuple.TupleEntry;
 public class RunModuleFunction extends BaseOperation<Tuple> implements Function<Tuple> {
 	private static final Logger logger = Logger.getLogger(RunModuleFunction.class);
 	private ModuleExecutorService mes;
-	private ModuleFactory module;
+	private PipelineStep pipelineStep;
 	private String localDir;
 
 	// Eats: <docName, docContent, docFailed>
 	// Emits: <docName, docContent, docFailed>
-	public RunModuleFunction(ModuleFactory module) {
+	public RunModuleFunction(PipelineStep pipelineStep) {
 		super(3, new Fields("docName", "docContent", "docFailed"));
-		this.module = module;
+		this.pipelineStep = pipelineStep;
 	}
 
-	public RunModuleFunction(ModuleFactory module, Fields fields) {
+	public RunModuleFunction(PipelineStep pipelineStep, Fields fields) {
 		super(3, fields);
+		this.pipelineStep = pipelineStep;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -93,23 +94,23 @@ public class RunModuleFunction extends BaseOperation<Tuple> implements Function<
 		String docContent = args.getString("docContent");
 		boolean docFailed = args.getBoolean("docFailed");
 		if (docFailed) {
-			logger.info("Skipping module: " + module.getName() + " for document: " + docName + " because of previous failure...");
+			logger.info("Skipping pipelineStep: " + pipelineStep.getName() + " for document: " + docName + " because of previous failure...");
 			result.add(new Text(docName));
 			result.add(new Text(docContent));
 			result.add(true);
 		} else {
 			try {
-				Module instance = module.getInstance();
+				Module instance = pipelineStep.getInstance();
 				instance.setInputDocument(docContent);
 				instance.setLocalDirectory(localDir);
 				long tstart = System.currentTimeMillis();
 				FutureTask<Module> executeModule = mes.executeModule(instance);
-				Module outputInstance = executeModule.get(module.getTimeout(), TimeUnit.MILLISECONDS);
+				Module outputInstance = executeModule.get(pipelineStep.getTimeout(), TimeUnit.MILLISECONDS);
 				String outputDocument = outputInstance.getOutputDocument();
 				boolean outputDocFailed = outputInstance.hasFailed();
 				long tend = System.currentTimeMillis();
-				logger.info("Applying module: " + module.getName() + " on document: " + docName + " took " + (tend - tstart) + " ms.");
-				logger.info("Module " + module.getName() + " result: " + !outputDocFailed + " on document: " + docName);
+				logger.info("Applying pipelineStep: " + pipelineStep.getName() + " on document: " + docName + " took " + (tend - tstart) + " ms.");
+				logger.info("Module " + pipelineStep.getName() + " result: " + !outputDocFailed + " on document: " + docName);
 				result.add(new Text(docName));
 				result.add(new Text(outputDocument));
 				result.add(outputDocFailed);

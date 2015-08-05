@@ -16,6 +16,7 @@
 package nl.surfsara.newsreader;
 
 import java.util.Arrays;
+import java.util.StringTokenizer;
 
 import nl.surfsara.newsreader.loader.Loader;
 import nl.surfsara.newsreader.pipeline.Pipeline;
@@ -27,8 +28,7 @@ import nl.surfsara.newsreader.pipeline.Pipeline;
  */
 public class Main {
 	public enum Tools {
-		LOADER("loader", "Import/Export tool for NAF files on Hadoop."), 
-		PIPELINE("pipeline", "Run the newsreader pipeline on Hadoop.");
+		LOADER("loader", "Import/Export tool for NAF files on Hadoop."), PIPELINE("pipeline", "Run the newsreader pipeline on Hadoop.");
 
 		private final String name;
 		private final String description;
@@ -48,6 +48,20 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		String version = Main.class.getPackage().getImplementationVersion();
+		StringTokenizer st = null;
+		if (version != null) {
+			st = new StringTokenizer(version, "_");
+		} else {
+			st = new StringTokenizer("");
+			version = "undetermined";
+		}
+		if (version != null && st.countTokens() >= 2) {
+			System.out.print("newsreader-hadoop version: " + st.nextToken() + " build " + st.nextToken() + "\n");
+		} else {
+			System.out.print("newsreader-hadoop version: " + version + "\n");
+		}
+		
 		int retval = 0;
 		boolean showUsage = false;
 		if (args.length <= 0) {

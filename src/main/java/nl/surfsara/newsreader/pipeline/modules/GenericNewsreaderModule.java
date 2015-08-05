@@ -27,11 +27,11 @@ import org.apache.log4j.Logger;
  * Most Newsreader components run as a run.sh bash script that consumes a NAF
  * text from standard in and outputs the annotated NAF text to standard out. For
  * running on Hadoop two default arguments have been added: the absolute path to
- * the component directory and an absolute path to a directory usable as
- * scratch or temporary storage. This class sets up the input- and outputstreams
- * and calls the run.sh script with the correct arguments. Failures are flagged
- * due to timeout (failure to process in time) or by exceeding a threshold of
- * newlines in the standard error stream (see the ModuleFactory class for these
+ * the component directory and an absolute path to a directory usable as scratch
+ * or temporary storage. This class sets up the input- and outputstreams and
+ * calls the run.sh script with the correct arguments. Failures are flagged due
+ * to timeout (failure to process in time) or by exceeding a threshold of
+ * newlines in the standard error stream (see the PipelineStep class for these
  * settings).
  * 
  * @author mathijs.kattenberg@surfsara.nl
@@ -39,10 +39,10 @@ import org.apache.log4j.Logger;
 public class GenericNewsreaderModule extends SubprocessModule {
 	private static final Logger logger = Logger.getLogger(GenericNewsreaderModule.class);
 
-	private ModuleFactory mfi;
+	private PipelineStep pipelineStep;
 
-	public GenericNewsreaderModule(ModuleFactory modulefactory) {
-		this.mfi = modulefactory;
+	public GenericNewsreaderModule(PipelineStep step) {
+		this.pipelineStep = step;
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public class GenericNewsreaderModule extends SubprocessModule {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ByteArrayOutputStream bes = new ByteArrayOutputStream();
 
-		File f = new File(mfi.getModulePath() + "/run.sh");
-		File component = new File(mfi.getModulePath());
+		File f = new File(pipelineStep.getModulePath() + "/run.sh");
+		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 
 		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + " " + scratch.getAbsolutePath());
@@ -62,7 +62,7 @@ public class GenericNewsreaderModule extends SubprocessModule {
 
 		String stderr = bes.toString();
 		int newlines = stderr.split(System.getProperty("line.separator")).length;
-		if (newlines > mfi.getNumErrorLines()) {
+		if (newlines > pipelineStep.getNumErrorLines()) {
 			setFailed(true);
 		}
 		// TODO instead of checking the number of newlines in stderr a much prettier solution would be to capture the exit code of

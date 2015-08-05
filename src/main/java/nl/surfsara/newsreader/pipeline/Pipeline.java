@@ -51,32 +51,40 @@ public class Pipeline implements Runnable {
 			String inputPath = args[0];
 			String outputPath = args[1];
 			String errorPath = args[2];
-			String componentsCache = args[3];
-			
-			Properties properties = new Properties();
-			properties.setProperty("mapreduce.job.complete.cancel.delegation.tokens", "false");
+			String layoutFile = args[3];
+			String componentsCache = args[4];
 
-			properties.put("mapreduce.task.timeout", "7200000");
-			properties.put("mapreduce.job.cache.archives", componentsCache + "#" + ModuleConstants.ARCHIVEROOT);
-
-			// Child jvm settings
-			//properties.put("mapreduce.map.java.opts", "-Xmx8G");
-			//properties.put("mapreduce.reduce.java.opts","");
-
-			// Memory limits
-			//properties.put("mapreduce.map.memory.mb", "10240");
-			//properties.put("mapreduce.reduce.memory.mb","");
-
-			// Slow start reducers:
-			properties.put("mapreduce.job.reduce.slowstart.completedmaps", "0.9");
-			
-			// Number of reducers
-			properties.put("mapreduce.job.reduces", "5");
-
-			AppProps.setApplicationJarClass(properties, Pipeline.class);
-			HadoopFlowConnector flowConnector = new HadoopFlowConnector(properties);
 			try {
-				NewsReaderFlow nrFlow = new NewsReaderFlow();
+				// Read the pipelinelayout 
+				PipelineLayout pl = new PipelineLayout(layoutFile);
+				logger.info("Running pipeline id: " + pl.getPipelineid());
+				logger.info("Running pipeline version: " + pl.getPipelineversion());
+
+				// Run the  pipeline
+				Properties properties = new Properties();
+				properties.setProperty("mapreduce.job.complete.cancel.delegation.tokens", "false");
+
+				properties.put("mapreduce.task.timeout", "7200000");
+				properties.put("mapreduce.job.cache.archives", componentsCache + "#" + ModuleConstants.ARCHIVEROOT);
+
+				// Child jvm settings
+				//properties.put("mapreduce.map.java.opts", "-Xmx8G");
+				//properties.put("mapreduce.reduce.java.opts","");
+
+				// Memory limits
+				//properties.put("mapreduce.map.memory.mb", "10240");
+				//properties.put("mapreduce.reduce.memory.mb","");
+
+				// Slow start reducers:
+				properties.put("mapreduce.job.reduce.slowstart.completedmaps", "0.9");
+
+				// Number of reducers
+				properties.put("mapreduce.job.reduces", "5");
+
+				AppProps.setApplicationJarClass(properties, Pipeline.class);
+				HadoopFlowConnector flowConnector = new HadoopFlowConnector(properties);
+
+				NewsReaderFlow nrFlow = new NewsReaderFlow(pl);
 
 				FlowDef flowDef = nrFlow.getFlowDefinition(inputPath, outputPath, errorPath);
 

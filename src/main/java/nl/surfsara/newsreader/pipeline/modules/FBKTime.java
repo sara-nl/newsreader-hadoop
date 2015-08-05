@@ -37,18 +37,17 @@ import org.apache.log4j.Logger;
  * This class sets up the input- and outputstreams and calls the run.sh script
  * with the correct arguments. Failures are flagged due to timeout (failure to
  * process in time) or by exceeding a threshold of newlines in the standard
- * error stream (see the ModuleFactory class for these settings).
+ * error stream (see the PipelineStep class for these settings).
  * 
  * @author mathijs.kattenberg@surfsara.nl
  */
 public class FBKTime extends SubprocessModule {
 	private static final Logger logger = Logger.getLogger(FBKTime.class);
 
-	private ModuleFactory mfi = ModuleFactory.FBKtime;
+	private PipelineStep pipelineStep;
 
-	public FBKTime(ModuleFactory modulefactory) {
-		// TODO this smells.. Necessary for the reflection..
-		// Ignore argument
+	public FBKTime(PipelineStep step) {
+		this.pipelineStep = step;
 	}
 
 	@Override
@@ -65,8 +64,8 @@ public class FBKTime extends SubprocessModule {
 		fos.close();
 		xmlStream.close();
 
-		File f = new File(mfi.getModulePath() + "/run.sh");
-		File component = new File(mfi.getModulePath());
+		File f = new File(pipelineStep.getModulePath() + "/run.sh");
+		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 
 		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + " " + scratch.getAbsolutePath() + " " + xmlf.getAbsolutePath());
@@ -78,7 +77,7 @@ public class FBKTime extends SubprocessModule {
 
 		String stderr = bes.toString();
 		int newlines = stderr.split(System.getProperty("line.separator")).length;
-		if (newlines > mfi.getNumErrorLines()) {
+		if (newlines > pipelineStep.getNumErrorLines()) {
 			setFailed(true);
 		}
 		logger.error(stderr);
