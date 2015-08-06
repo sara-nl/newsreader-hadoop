@@ -49,6 +49,15 @@ public class Main {
 
 	public static void main(String[] args) {
 		String version = Main.class.getPackage().getImplementationVersion();
+		Package[] packages = Package.getPackages();
+		if (version == null) {
+			for (Package p : packages) {
+				if ("nl.surfsara.newsreader".equals(p.getName())) {
+					version = p.getImplementationVersion();
+				}
+
+			}
+		}
 		StringTokenizer st = null;
 		if (version != null) {
 			st = new StringTokenizer(version, "_");
@@ -61,7 +70,7 @@ public class Main {
 		} else {
 			System.out.print("newsreader-hadoop version: " + version + "\n");
 		}
-		
+
 		int retval = 0;
 		boolean showUsage = false;
 		if (args.length <= 0) {

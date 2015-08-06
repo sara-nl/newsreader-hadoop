@@ -46,7 +46,7 @@
 
 		<jar destfile="${project.name}-${version.major}.${version.minor}.${build.number}.jar" compress="true">
 			<fileset dir="${bin.dir}" includes="**/*.*" />
-			<!-- <zipfileset dir="${lib.dir.build}" prefix="lib/" /> -->
+			<zipfileset dir="${lib.dir.build}" prefix="lib/" />
 			<manifest>
 				<attribute name="Main-Class" value="${project.main}" />
 				<attribute name="Class-Path" value="${dist.manifest.classpath}" />
@@ -64,10 +64,10 @@
 		<echo>Building: ${project.name} - ${version.major}.${version.minor}.${build.number}-${version.date}</echo>
 		<buildnumber file="${build.dir}/build.number" />
 		<copy file="${project.name}-${version.major}.${version.minor}.${build.number}.jar" todir="${dist.dir}" />
-		<!-- Copy lib to dist dir -->
+		<!-- Copy lib to dist dir
 		<copy todir="${dist.lib.dir}">
 			<fileset dir="${lib.dir.build}" />
-		</copy>
+		</copy>  -->
 		<!-- Copy scripts to dist dir -->
 		<copy todir="${dist.scripts.dir}">
 			<fileset dir="${scripts.dir}" />
@@ -78,6 +78,7 @@
 		</copy>
 		<!-- Copy components to dist dir -->
 		<copy file="${componentsFile}" todir="${dist.dir}"/>
+		<symlink link="${dist.dir}/${project.name}.jar" resource="${dist.dir}/${project.name}-${version.major}.${version.minor}.${build.number}.jar"/>
 	</target>
 
 	<target name="package" depends="clean, build">
@@ -101,6 +102,7 @@
 			<fileset dir="${dist.dir}" includes="**/*" />
 		</delete>
 		<delete file="${componentsFile}"/>
+		<symlink action="delete" link="${dist.dir}/${project.name}.jar"/>
 		<delete file="newsreader.dot"/>
 		<delete file="newsreader-hadoop.log"/>
 	</target>
