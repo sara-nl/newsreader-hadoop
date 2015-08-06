@@ -7,8 +7,8 @@
 	</info>
 	
 	  <configurations>
-        <conf name="build" description="compile time jars"/>
-        <conf name="compile" extends="build" description="runtime time jars"/>
+        <conf name="build" description="Needed at runtime"/>
+        <conf name="compile" extends="build" description="Needed for compilation, provided at runtime"/>
       </configurations>
 	
 	<dependencies>
