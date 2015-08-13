@@ -54,7 +54,7 @@ public class GenericNewsreaderModule extends SubprocessModule {
 		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 
-		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + " " + scratch.getAbsolutePath());
+		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + "/ " + scratch.getAbsolutePath() + "/");
 		super.setSubProcessStdIn(IOUtils.toInputStream(getInputDocument()));
 		super.setSubProcessStdOut(bos);
 		super.setSubProcessStdErr(bes);

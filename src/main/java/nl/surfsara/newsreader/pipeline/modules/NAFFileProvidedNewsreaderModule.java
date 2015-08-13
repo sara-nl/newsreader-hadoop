@@ -68,7 +68,7 @@ public class NAFFileProvidedNewsreaderModule extends SubprocessModule {
 		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 
-		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + " " + scratch.getAbsolutePath() + " " + xmlf.getAbsolutePath());
+		super.setCommandLine("/bin/bash " + f.getAbsolutePath() + " " + component.getAbsolutePath() + "/ " + scratch.getAbsolutePath() + "/ " + xmlf.getAbsolutePath());
 
 		super.setSubProcessStdIn(IOUtils.toInputStream(getInputDocument()));
 		super.setSubProcessStdOut(bos);
