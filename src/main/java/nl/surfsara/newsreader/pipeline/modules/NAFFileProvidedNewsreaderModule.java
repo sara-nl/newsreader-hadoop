@@ -41,12 +41,12 @@ import org.apache.log4j.Logger;
  * 
  * @author mathijs.kattenberg@surfsara.nl
  */
-public class FBKTime extends SubprocessModule {
-	private static final Logger logger = Logger.getLogger(FBKTime.class);
+public class NAFFileProvidedNewsreaderModule extends SubprocessModule {
+	private static final Logger logger = Logger.getLogger(NAFFileProvidedNewsreaderModule.class);
 
 	private PipelineStep pipelineStep;
 
-	public FBKTime(PipelineStep step) {
+	public NAFFileProvidedNewsreaderModule(PipelineStep step) {
 		this.pipelineStep = step;
 	}
 
@@ -64,7 +64,7 @@ public class FBKTime extends SubprocessModule {
 		fos.close();
 		xmlStream.close();
 
-		File f = new File(pipelineStep.getModulePath() + "/run.sh");
+		File f = new File(pipelineStep.getModulePath() + "/run.sh.hadoop");
 		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 

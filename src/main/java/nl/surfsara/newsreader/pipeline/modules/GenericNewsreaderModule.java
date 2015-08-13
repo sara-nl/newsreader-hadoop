@@ -50,7 +50,7 @@ public class GenericNewsreaderModule extends SubprocessModule {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		ByteArrayOutputStream bes = new ByteArrayOutputStream();
 
-		File f = new File(pipelineStep.getModulePath() + "/run.sh");
+		File f = new File(pipelineStep.getModulePath() + "/run.sh.hadoop");
 		File component = new File(pipelineStep.getModulePath());
 		File scratch = new File(getLocalDirectory());
 
