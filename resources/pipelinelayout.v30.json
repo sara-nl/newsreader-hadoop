@@ -1,0 +1,25 @@
+{
+"id":"hadoop-en",
+"description":"Version3 English pipeline",
+"version":"3.0",
+"layout":[
+    {"name":"EHU-tok", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-topic.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-pos.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-parse.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-nerc.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-ned.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"VUA-popen-nedreranker.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-wikify.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-corefgraph.v21", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"VUA-opinion-miner", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-ukb", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"VUA-ims-wsd", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"EHU-srl-server", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"FBK-time.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"VUA-eventcoref.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"FBK-temprel.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"FBK-causalrel.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"VUA-factuality.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4}
+]
+}

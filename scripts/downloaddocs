@@ -1,0 +1,4 @@
+#!/bin/bash
+# $1 - hdfs path
+# $2 - destination path
+yarn jar newsreader-hadoop.jar loader unload "$1"/part-* "$2"
