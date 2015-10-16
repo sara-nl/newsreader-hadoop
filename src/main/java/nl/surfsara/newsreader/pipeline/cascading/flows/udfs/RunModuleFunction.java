@@ -16,6 +16,7 @@
 package nl.surfsara.newsreader.pipeline.cascading.flows.udfs;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.UUID;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
@@ -81,6 +82,7 @@ public class RunModuleFunction extends BaseOperation<Tuple> implements Function<
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
+		logger.error("Charset: " + Charset.defaultCharset());
 		TupleEntry args = functionCall.getArguments();
 		String docName = args.getString("docName");
 		flowProcess.setStatus("Processing: " + docName);
