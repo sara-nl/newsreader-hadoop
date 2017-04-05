@@ -1,0 +1,57 @@
+apply plugin: 'java'
+
+version = 1.1
+
+ext {
+    mainClassName = 'nl.surfsara.newsreader.Main'
+    componentsDir = 'newsreader-hadoop-components'
+}
+
+configurations {
+    runtime {
+        transitive = true
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://conjars.org/repo' }
+}
+
+dependencies {
+    compile group: 'cascading', name: 'cascading-core', version: '3.0.1'
+    compile group: 'cascading', name: 'cascading-hadoop', version: '3.0.1'
+    compile group: 'org.json', name: 'json', version: '20140107'
+    compileOnly group: 'org.apache.hadoop', name: 'hadoop-client', version: '2.6.0'
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': mainClassName,
+            'Class-Path': configurations.runtime.files.collect { 'lib/' + it.getName() }.join(' '),
+            'Implementation-Version': version
+        )
+    }
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+task zipComponents(type: Zip) {
+    archiveName = componentsDir + '.' + extension
+    from componentsDir
+    into componentsDir
+}
+
+task copyDist(type: Copy) {
+    from files('resources', 'scripts') + jar + zipComponents
+    into 'build/dist'
+}
+
+build {
+    dependsOn {
+        zipComponents
+        copyDist
+    }
+}
