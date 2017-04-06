@@ -31,11 +31,7 @@ task zipComponents(type: Zip) {
 
 jar {
     manifest {
-        attributes(
-            'Main-Class': mainClassName,
-            'Class-Path': configurations.runtime.files.collect { 'lib/' + it.getName() }.join(' '),
-            'Implementation-Version': version
-        )
+        attributes('Main-Class': mainClassName)
     }
     into('lib') {
         from configurations.runtime
