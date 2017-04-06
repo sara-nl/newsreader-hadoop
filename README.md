@@ -15,24 +15,24 @@ For more information on the newsreader project, please visit the project site:
 
 ## Building
 
-Ant build scripts and Ivy dependency resolution scripts are included with the
-project. How you use these is dependent on your programming environment the
-following works for eclipse:
+The project is built using the [Gradle](http://gradle.org) build system. It
+includes build scripts and a wrapper to bootstrap the build environment. How
+you use these is dependent on your programming environment. The following works
+for the commandline, but a number of IDE's such as IntelliJ and Eclipse have
+Gradle support via plugins.
 
-1. Clone the project
-2. Open eclipse and create a new Java project; Do not use the default location
-   but select the directory you just cloned into as location for the project
-3. The source files should now appear in your project. Make sure to install the
-   IvyDE package and Ivy Ant tasks available here:
-   <http://ant.apache.org/ivy/ivyde/download.cgi>
-4. With the Ivy packages installed the ivy.xml can be used for resolving the
-   dependencies: right click the file and 'Add Ivy Library...'.
-5. Make a subdirectory within the project: newsreader-hadoop-components and
+1. Clone the project.
+2. Open a terminal and change directory to the project root.
+3. Run the Gradle wrapper: `./gradlew`. This will download the required Gradle
+   software.
+4. Make a subdirectory within the project: newsreader-hadoop-components and
    download the accompanying components from
    [BeeHub](https://beehub.nl/Newsreader/newsreader-hadoop-components) to this
    directory.
-6. Use the Ant build tasks (Ant view in Eclipse) to build the jar and zip the
-   components.
+5. Build the jar and zip the components with `./gradlew installDist`. These
+   will be create in the directory build/install/newsreader-hadoop. Use
+   `./gradlew build` to create a single zip archive in build/distributions
+   containing the binary distribution.
 
 ## Running the pipeline
 
