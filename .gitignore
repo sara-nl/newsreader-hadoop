@@ -19,6 +19,7 @@ hs_err_pid*
 # Generated files
 bin/
 gen/
+/build
 /target
 /.settings/**
 /.project
@@ -30,3 +31,9 @@ out/
 err/
 input/
 *.dot
+
+# Gradle
+/.gradle/
+
+# IntelliJ
+/.idea/
