@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'distribution'
 
 version = 1.1
 
@@ -7,11 +8,8 @@ ext {
     componentsDir = 'newsreader-hadoop-components'
 }
 
-configurations {
-    runtime {
-        transitive = true
-    }
-}
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 repositories {
     mavenCentral()
@@ -23,6 +21,12 @@ dependencies {
     compile group: 'cascading', name: 'cascading-hadoop', version: '3.0.1'
     compile group: 'org.json', name: 'json', version: '20140107'
     compileOnly group: 'org.apache.hadoop', name: 'hadoop-client', version: '2.6.0'
+}
+
+task zipComponents(type: Zip) {
+    archiveName = componentsDir + '.' + extension
+    from componentsDir
+    into componentsDir
 }
 
 jar {
@@ -38,20 +42,13 @@ jar {
     }
 }
 
-task zipComponents(type: Zip) {
-    archiveName = componentsDir + '.' + extension
-    from componentsDir
-    into componentsDir
-}
-
-task copyDist(type: Copy) {
-    from files('resources', 'scripts') + jar + zipComponents
-    into 'build/dist'
-}
-
-build {
-    dependsOn {
-        zipComponents
-        copyDist
+distributions {
+    main {
+        contents {
+	    from 'resources'
+	    from 'scripts'
+            from jar
+	    from zipComponents
+	}
     }
 }
