@@ -29,8 +29,8 @@ Gradle support via plugins.
    download the accompanying components from
    [BeeHub](https://beehub.nl/Newsreader/newsreader-hadoop-components) to this
    directory.
-5. Build the jar and zip the components with `./gradlew installDist`. These
-   will be create in the directory build/install/newsreader-hadoop. Use
+5. Build the jar and zip the components with `./gradlew installDist`. The
+   results will be stored in the directory build/install/newsreader-hadoop. Use
    `./gradlew build` to create a single zip archive in build/distributions
    containing the binary distribution.
 
