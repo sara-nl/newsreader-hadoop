@@ -111,13 +111,14 @@ public class Pipeline implements Runnable {
 		System.out.println(" 1.) an inputpath: a path on HDFS containing documents in sequencefile format (see the load tool). Wildcards allowed.");
 		System.out.println(" 2.) an outputpath: a path on HDFS where output documents should be written.");
 		System.out.println(" 3.) an errorpath: a path on HDFS where documents who failed to be processed should be stored.");
-		System.out.println(" 4.) a components file: a path on HDFS to the components zip file.");
+		System.out.println(" 4.) a pipeline layout: a JSON description of the pipeline components/configuration");
+		System.out.println(" 5.) a components file: a path on HDFS to the components zip file.");
 		System.out.println();
 		System.out.println("A note on the components zip file: the newsreader components should be zipped and uploaded to Hadoop. Then, distributed cache is used");
 		System.out.println("to distribute and symlink the components to all the compute nodes.");
 		System.out.println();
 		System.out.println("An example:");
-		System.out.println("Run the pipeline on documents in /foo/*: yarn jar newsreader-hadoop.jar pipeline /foo/in/* /bar/out /bar/error /foo/components.zip");
+		System.out.println("Run the pipeline on documents in /foo/*: yarn jar newsreader-hadoop.jar pipeline /foo/in/* /bar/out /bar/error pipeline.json /foo/components.zip");
 		System.out.println();
 	}
 }
