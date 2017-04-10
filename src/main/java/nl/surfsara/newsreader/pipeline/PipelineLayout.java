@@ -17,7 +17,6 @@ package nl.surfsara.newsreader.pipeline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +24,8 @@ import java.util.List;
 import nl.surfsara.newsreader.pipeline.modules.Module;
 import nl.surfsara.newsreader.pipeline.modules.PipelineStep;
 
-import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * Class that reads and parses a layout file. The layout file is json document
@@ -48,25 +46,27 @@ public class PipelineLayout {
 		init(layoutFile);
 	}
 
-	private void init(String layouFile) throws FileNotFoundException, IOException, ClassNotFoundException {
-		List<String> lines = IOUtils.readLines(new FileReader(new File(layoutFile)));
-		StringBuilder jsonString = new StringBuilder();
-		for (String s : lines) {
-			jsonString.append(s);
+	private void init(String layoutFile) throws FileNotFoundException, IOException, ClassNotFoundException {
+
+		ObjectMapper mapper;
+		if (layoutFile.endsWith(".yaml") || layoutFile.endsWith(".yml")) {
+			mapper = new ObjectMapper(new YAMLFactory());
+		} else {
+			mapper = new ObjectMapper();
 		}
-		// TODO move field reference strings to constants/enums or a static class  
-		JSONObject jo = new JSONObject(jsonString.toString());
-		pipelineid = (String) jo.get("id");
-		pipelineversion = (String) jo.get("version");
-		description = (String) jo.get("description");
-		JSONArray ja = jo.getJSONArray("layout");
-		steps = new ArrayList<PipelineStep>();
-		for (int i = 0; i < ja.length(); i++) {
-			JSONObject jsonObject = ja.getJSONObject(i);
-			String name = jsonObject.getString("name");
-			String className = jsonObject.getString("class");
-			long timeOut = jsonObject.getLong("timeout");
-			int numErrorLine = jsonObject.getInt("numErrorLines");
+
+		PipelineDescription pd = mapper.readValue(new File(layoutFile), PipelineDescription.class);
+
+		pipelineid = pd.id;
+		pipelineversion = pd.version;
+		description = pd.description;
+		List<PipelineComponentDescription> layout = pd.layout;
+		steps = new ArrayList<>();
+		for (PipelineComponentDescription pcd: layout) {
+			String name = pcd.name;
+			String className = pcd.clazz;
+			long timeOut = pcd.timeout;
+			int numErrorLine = pcd.numErrorLines;
 
 			@SuppressWarnings("unchecked")
 			PipelineStep step = new PipelineStep(name, ((Class<? extends Module>) Class.forName(className)), timeOut, numErrorLine);

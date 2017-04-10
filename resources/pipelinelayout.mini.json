@@ -1,0 +1,19 @@
+{
+    "id": "hadoop-en-min",
+    "description": "Minimal English pipeline",
+    "version": "1.0",
+    "layout": [
+        {
+            "name": "EHU-tok",
+            "class": "nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule",
+            "timeout": 600000,
+            "numErrorLines": 4
+        },
+        {
+            "name": "EHU-pos.v30",
+            "class": "nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule",
+            "timeout": 600000,
+            "numErrorLines": 4
+        }
+    ]
+}
