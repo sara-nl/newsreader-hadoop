@@ -1,7 +1,0 @@
-#!/bin/bash
-# $1 - hdfs input
-# $2 - hdfs output
-# $3 - hdfs output for failed docs
-# $4 - layout to use
-# $5 - components on hdfs
-yarn jar newsreader-hadoop.jar pipeline "$1" "$2" "$3" "$4" "$5"

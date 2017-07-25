@@ -24,6 +24,7 @@ dependencies {
 }
 
 task zipComponents(type: Zip) {
+    zip64 = true
     archiveName = componentsDir + '.' + extension
     destinationDir = project.rootDir
     from componentsDir

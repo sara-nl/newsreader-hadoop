@@ -1,5 +1,0 @@
-#!/bin/bash
-# $1 - input path
-# $2 - destination path
-# $3 - input files per hdfs file
-yarn jar newsreader-hadoop.jar loader load "$1" "$2"/file "$3"

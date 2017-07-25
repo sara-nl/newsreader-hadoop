@@ -18,7 +18,7 @@
     {"name":"EHU-srl-server", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
     {"name":"FBK-time.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
     {"name":"VUA-eventcoref.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":4},
-    {"name":"FBK-temprel.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
+    {"name":"FBK-temprel.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":100},
     {"name":"FBK-causalrel.v30", "class":"nl.surfsara.newsreader.pipeline.modules.NAFFileProvidedNewsreaderModule", "timeout":1200000, "numErrorLines":4},
     {"name":"VUA-factuality.v30", "class":"nl.surfsara.newsreader.pipeline.modules.GenericNewsreaderModule", "timeout":1200000, "numErrorLines":8}
 ]

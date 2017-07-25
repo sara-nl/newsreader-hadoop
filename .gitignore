@@ -37,3 +37,4 @@ input/
 
 # IntelliJ
 /.idea/
+*.iml
